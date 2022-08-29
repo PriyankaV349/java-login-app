@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {   
-         deploy adapters: [tomcat9(credentialsId: 'jenkins', path: '', url: 'http://54.159.181.173:8080')], contextPath: null, war: '**/**.war'
+         deploy adapters: [tomcat8(credentialsId: 'Java-Jenkins-Pipeline-1', path: '', url: 'http://54.221.92.39:8080')], contextPath: null, war: '**/**.war'
       }
     }
   }

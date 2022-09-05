@@ -1,10 +1,6 @@
 pipeline {
   agent any
   environment {
-    AWS Access Key ID [None]="AKIAQKTIAN7USICJHG4L"
-    AWS Secret Access Key [None]="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"
-    Default region name [None]="us-east-1"
-    Default output format [None]="None"
     AWS_ACCOUNT_ID="022766710761"
     AWS_DEFAULT_REGION="us-east-1" 
     IMAGE_REPO_NAME="jenkins-pipeline-build-demo"
@@ -18,7 +14,6 @@ pipeline {
     stage('Logging into AWS ECR') {
       steps {
         script {
-	  sh "aws configure"
           sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 022766710761.dkr.ecr.us-east-1.amazonaws.com"
         }                
       }

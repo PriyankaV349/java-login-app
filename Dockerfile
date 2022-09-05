@@ -1,20 +1,20 @@
-FROM tomcat:9.0
+FROM tomcat:8.5.82
 
-WORKDIR /usr/local/tomcat
+WORKDIR /opt/tomcat
 
 User root
 
-RUN mv /usr/local/tomcat/webapps /usr/local/tomcat/webapps2
+RUN mv /opt/tomcat/webapps /opt/tomcat/webapps2
 
-RUN mv /usr/local/tomcat/webapps.dist/ webapps
+RUN mv /opt/tomcat/webapps.dist/ webapps
 
-ADD ./target/dptweb-1.0.war /usr/local/tomcat/webapps/
+ADD ./target/dptweb-1.0.war /opt/tomcat/webapps/
 
-COPY tomcat-users.xml /usr/local/tomcat/conf/
+COPY tomcat-users.xml /opt/tomcat/conf/
 
-COPY context.xml /usr/local/tomcat/webapps/manager/META-INF/
+COPY context.xml /opt/tomcat/webapps/manager/META-INF/
 
-COPY context.xml /usr/local/tomcat/webapps/host-manager/META-INF/
+COPY context.xml /opt/tomcat/webapps/host-manager/META-INF/
 
 EXPOSE 8080
 

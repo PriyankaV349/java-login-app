@@ -18,12 +18,6 @@ pipeline {
         }                
       }
     }
-        
-    stage('GetCode') {
-      steps {
-        git 'https://github.com/PriyankaV349/java-login-app.git'
-      }
-    }
       
     stage('Build') {
       steps {

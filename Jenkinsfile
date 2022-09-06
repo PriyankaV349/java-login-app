@@ -11,7 +11,7 @@ pipeline {
    
   stages {
       
-    stage('Logging into AWS ECR') {
+    stage('Login to AWS ECR') {
       steps {
         script {
           sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 022766710761.dkr.ecr.us-east-1.amazonaws.com"
@@ -26,7 +26,7 @@ pipeline {
     }
   
     // Building Docker images
-    stage('Building image') {
+    stage('Building Docker image') {
       steps {
         script {
           dockerImage = docker.build "jenkins-pipeline-build-demo:latest"
@@ -35,7 +35,7 @@ pipeline {
     }
    
     // Uploading Docker images into AWS ECR
-    stage('Pushing to ECR') {
+    stage('Pushing image to ECR') {
       steps {  
         script {
           sh "docker tag jenkins-pipeline-build-demo:latest 022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest"

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: java-app
-          image: 503593019758.dkr.ecr.ap-south-1.amazonaws.com/jenkins-pipeline-build-demo:latest
+          image: 022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest
           ports:
             - containerPort: 8080
           env:

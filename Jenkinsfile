@@ -46,7 +46,7 @@ pipeline {
 	  
     stage("Deploy to EKS") {
       steps {	  
-	withKubeConfig(caCertificate: '', clusterName: 'jenkins-eks-cluster', contextName: '', credentialsId: 'jenkins-eks-aws-credentials', namespace: '', serverUrl: '') {
+	withKubeConfig(caCertificate: '', clusterName: 'jenkins-eks-cluster', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
           sh '''if /var/lib/jenkins/bin/kubectl get deploy | grep java-login-app
                 then
                 /var/lib/jenkins/bin/kubectl set image deployment jenkins-pipeline-build-demo java-app=022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest

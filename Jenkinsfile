@@ -53,7 +53,7 @@ pipeline {
                 /var/lib/jenkins/bin/kubectl set image deployment jenkins-pipeline-build-demo java-app=022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest
                /var/lib/jenkins/bin/kubectl rollout restart deployment java-login-app
                 else
-                /var/lib/jenkins/bin/kubectl apply -f deployment.yaml
+                /var/lib/jenkins/bin/kubectl apply -f deployment.yml
                 fi'''
 	}			
       }

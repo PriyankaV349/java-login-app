@@ -1,12 +1,7 @@
 pipeline {
   agent any
   environment {
-    AWS_ACCOUNT_ID="022766710761"
-    AWS_DEFAULT_REGION="us-east-1" 
-    IMAGE_REPO_NAME="jenkins-pipeline-build-demo"
-    IMAGE_TAG="latest"
-    REPOSITORY_URI = "022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo"
-	PATH = "$PATH:/usr/share/maven/bin"
+    PATH = "$PATH:/usr/share/maven/bin"
   }
    
   stages {

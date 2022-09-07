@@ -44,12 +44,17 @@ pipeline {
       }
     }
 	  
-    stage('Deploy'){
-      steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'jenkins-eks-aws-credentials', accessKeyVariable: 'AKIAQKTIAN7USICJHG4L', secretKeyVariable: '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']]) {
-	  sh 'aws eks update-kubeconfig --region us-east-1 --name jenkins-eks-cluster'
-	  sh '/root/bin/kubectl apply -f deployment.yml'
-	}
+    stage("Deploy to EKS") {
+      steps {	  
+	withKubeConfig(caCertificate: '', clusterName: 'jenkins-eks-cluster', contextName: '', credentialsId: 'jenkins-eks-aws-credentials', namespace: '', serverUrl: '') {
+          sh '''if /var/lib/jenkins/bin/kubectl get deploy | grep java-login-app
+                then
+                /var/lib/jenkins/bin/kubectl set image deployment jenkins-pipeline-build-demo java-app=022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest
+                /var/lib/jenkins/bin/kubectl rollout restart deployment java-login-app
+                else
+                /var/lib/jenkins/bin/kubectl apply -f deployment.yaml
+                fi'''
+	}			
       }
     }
     

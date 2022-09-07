@@ -44,17 +44,12 @@ pipeline {
       }
     }
 	  
-    stage("Deploy to EKS") {
-      steps {	  
-	withKubeConfig(caCertificate: '', clusterName: 'jenkins-eks-cluster', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
-          sh '''if /var/lib/jenkins/bin/kubectl get deploy | grep java-login-app
-                then
-                /var/lib/jenkins/bin/kubectl set image deployment jenkins-pipeline-build-demo java-app=022766710761.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-build-demo:latest
-                /var/lib/jenkins/bin/kubectl rollout restart deployment java-login-app
-                else
-                /var/lib/jenkins/bin/kubectl apply -f deployment.yaml
-                fi'''
-	}			
+    stage('Deploy'){
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'jenkins-eks-aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+	  sh 'aws eks update-kubeconfig --region us-east-1 --name java-login-app-3'
+	  sh '/root/bin/kubectl apply -f deployment.yml'
+	}
       }
     }
     

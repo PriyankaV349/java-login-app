@@ -17,5 +17,11 @@ pipeline{
           }
         }
       }
+      
+      stage('Deploy') {
+        steps {   
+          deploy adapters: [tomcat8(path: '', url: 'http://65.0.109.114:8080/')], contextPath: null, war: '**/**.war'
+        }       
+      }
     }
 }  

@@ -18,10 +18,12 @@ pipeline{
         }
       }
       
-      stage('Deploy') {
-        steps {   
-          deploy adapters: [tomcat9(path: '', url: 'http://65.0.109.114:8080/')], contextPath: null, onFailure: false, war: '**/*.war'
-        }       
+      stage ('Deploy') {
+        steps {
+          script {
+            deploy adapters: [tomcat9(path: '', url: 'http://65.0.109.114:8080/')], contextPath: null, onFailure: false, war: '**/*.war'
+          }
+        }
       }
     }
 }  
